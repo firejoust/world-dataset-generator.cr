@@ -1,0 +1,14 @@
+name: world-dataset-generator
+version: 0.1.0
+
+authors:
+  - firejoust <42525540+firejoust@users.noreply.github.com>
+
+targets:
+  world-generator:
+    main: src/world-dataset-generator.cr
+
+crystal: '>= 1.13.3'
+
+license: MIT
+
