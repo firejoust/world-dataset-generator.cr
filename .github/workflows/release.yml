@@ -20,7 +20,7 @@ jobs:
       - name: Set up Crystal
         uses: crystal-lang/install-crystal@v1
         with:
-          crystal: '>= 1.13.3'
+          crystal: 1.13
 
       - name: Install dependencies
         run: shards install
