@@ -8,6 +8,6 @@ targets:
   world-generator:
     main: src/world-dataset-generator.cr
 
-crystal: '>= 1.13.3'
+crystal: '>= 1.13'
 
 license: MIT
