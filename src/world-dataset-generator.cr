@@ -1,11 +1,6 @@
 require "json"
 require "random"
 require "compress/zlib"
-require "log"
-
-# Configure logging
-Log.setup_from_env
-logger = Log.for("minecraft_world_generator")
 
 # Type aliases for clarity
 alias PositionString = String
