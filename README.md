@@ -1,4 +1,4 @@
-# Minecraft-Style World Generator (Crystal)
+# World Dataset Generator
 
 This program generates Minecraft-style worlds based on a configuration specified in a JSON file. Designed for creating RL datasets quickly, it supports layered generation, probabilistic block/structure placement, recursive structures, named areas, and random world rotation. The generated worlds are exported into a custom, compressed binary format using palettes for efficiency.
 
