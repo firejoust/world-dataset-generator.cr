@@ -11,4 +11,3 @@ targets:
 crystal: '>= 1.13.3'
 
 license: MIT
-
