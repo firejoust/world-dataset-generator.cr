@@ -1,0 +1,47 @@
+name: Build and Release Crystal Binary
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-release:
+    name: Build and Create Release
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Crystal
+        uses: crystal-lang/install-crystal@v1
+        with:
+          crystal: '>= 1.13.3'
+
+      - name: Install dependencies
+        run: shards install
+
+      - name: Build release binary
+        # The output binary will be named 'world-dataset-generator' by default
+        run: crystal build src/world-dataset-generator.cr --release
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v2
+        env:
+          # The GITHUB_TOKEN is automatically provided by GitHub Actions
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: release-${{ github.sha }}
+          name: Automated Release ${{ github.sha }}
+          body: |
+            Automated release generated from commit ${{ github.sha }}.
+            Binary built in release mode.
+          draft: false
+          prerelease: false
+          # Specify the file(s) to upload as release assets
+          files: ./world-dataset-generator
