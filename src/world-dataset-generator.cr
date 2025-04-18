@@ -10,7 +10,7 @@ alias StructureDefinition = Hash(PositionString, ProbabilisticValue)
 alias AreaDefinition = NamedTuple(start: PositionString, end_pos: PositionString)
 
 # Position class to handle coordinates
-class Position
+struct Position
   property x : Int32
   property y : Int32
   property z : Int32
@@ -57,7 +57,7 @@ class Position
 end
 
 # Layer class to represent a volume in the world
-class Layer
+struct Layer
   property start : Position
   property end_pos : Position
   property contents : ProbabilisticValue
@@ -80,8 +80,12 @@ class World
 
   def set_block(pos : Position, block_id : Int32)
     rotated_pos = pos.rotate(@rotation)
-    if rotated_pos.in_bounds? && block_id != 0 # Only store non-air blocks
-      @blocks[rotated_pos] = block_id
+    if rotated_pos.in_bounds?
+      if block_id == 0  # Air block
+        @blocks.delete(rotated_pos)  # Remove the entry if it exists
+      else
+        @blocks[rotated_pos] = block_id  # Store non-air blocks
+      end
     end
   end
 
